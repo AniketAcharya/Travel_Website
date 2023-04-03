@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-
+9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Paytm-Nodejs</title>
+    <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body style="background-color:#f5f3ef">
+    <div class="video-container">
+        <div class="color-overlay"></div>
+        <video autoplay loop muted>
+            <source src="images/video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="row my-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <form class="" method="post" action="/paynow" name="form1" ng-app="myApp"
+                        ng-controller="validateCtrl" novalidate>
+                        <div class="form-group">
+                            <label for="">Name: </label>
+                            <input class="form-control" type="text" name="name" value="" ng-model="name" 
+                            ng-pattern="/[a-zA-Z\s]+/" required>
+                            <span style="color:red" ng-show="form1.name.$dirty && form1.name.$invalid">
+                                <span ng-show="form1.name.$error.required">This field is
+                                    required</span>
+                                    <span ng-show="form1.name.$error.pattern">Invalid
+                                        name</span>
+                                </span>
+                            </span>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email: </label>
+                            <input class="form-control" type="text" name="email" value="" ng-model="email" 
+                            ng-pattern="/([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})/" required>
+                            <span style="color:red" ng-show="form1.email.$dirty && form1.email.$invalid">
+                                <span ng-show="form1.email.$error.required">This field is
+                                    required</span>
+                                <span ng-show="form1.email.$error.email">Please enter a valid email address</span>
+                                <span ng-show="form1.email.$error.pattern">Invalid
+                                    email</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Phone: </label>
+                            <input class="form-control" type="text" name="phone" value="" ng-model="phone"
+                                ng-pattern="/[0-9]{10}/" required>
+                            <span style="color:red" ng-show="form1.phone.$dirty && form1.phone.$invalid">
+                                <span ng-show="form1.phone.$error.required">This field is
+                                    required</span>
+                                <span ng-show="form1.phone.$error.pattern">Invalid
+                                    phone</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Amount: </label>
+                            <input class="form-control" type="text" name="amount" value="4999" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="button" value="Pay Now" class="btn form-control btn-primary" onclick="window.open('https://rzp.io/l/kcNtMtjb')" />
+                        </div>
+                    </form>
+                    <script>
+                        var app = angular.module('myApp', []);
+                        app.controller('validateCtrl', function ($scope) {
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

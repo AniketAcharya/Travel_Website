@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Vollkorn:400,400i,600,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style3.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <title>Registration</title>
+  </head>
+  <body>
+    <div class="video-container">
+      <video autoplay loop muted>
+        <source src="images/video.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="form">
+      <h1 class="center"><b>Registration</b></h1>
+      <div class="tab-header">
+        <div class="active">Sign Up</div>
+        <div>Sign In</div>
+      </div>
+      <div class="tab-content">
+        <div class="tab-body active">
+          <form action="/signup" method="post" id="registration_form1">
+            <div class="form-element">
+              <input type="email" placeholder="Email" name="email" id="form_email" required=""/>
+              <span class="error_form" id="email_error_message"></span>
+            </div>
+            <div class="form-element">
+              <input type="text" placeholder="Username" name="username" id="form_fname" required=""/>
+              <span class="error_form" id="fname_error_message"></span>
+            </div>
+            <div class="form-element">
+              <input type="password" placeholder="Password" name="password" id="form_password" required=""/>
+              <span class="error_form" id="password_error_message"></span>
+            </div>
+            <div class="form-element">
+              <button type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="tab-body">
+          <form action="/login" method="post" id="registration_form2">
+            <div class="form-element">
+              <input type="text" placeholder="Username" name="username" />
+            </div>
+            <div class="form-element">
+              <input type="password" placeholder="Password" name="password" />
+            </div>
+            <div class="form-element">
+              <input type="checkbox" id="remember_me" />
+              <label for="remember_me">Remember me</label>
+            </div>
+            <div class="form-element">
+              <button type="submit">Sign In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="script_2.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("#fname_error_message").hide();
+        $("#email_error_message").hide();
+        $("#password_error_message").hide();
+
+        var error_fname = false;
+        var error_email = false;
+        var error_password = false;
+
+        $("#form_fname").focusout(function () {
+          check_fname();
+        });
+        $("#form_email").focusout(function () {
+          check_email();
+        });
+        $("#form_password").focusout(function () {
+          check_password();
+        });
+
+        function check_fname() {
+          var pattern = /^[a-zA-Z]*$/;
+          var fname = $("#form_fname").val();
+          if (pattern.test(fname) && fname !== "") {
+            $("#fname_error_message").hide();
+            $("#form_fname").css("border-bottom", "2px solid #34F458");
+          } else {
+            $("#fname_error_message").html("Should not contain only numbers");
+            $("#fname_error_message").show();
+            $("#form_fname").css("border-bottom", "2px solid #F90A0A");
+            error_fname = true;
+          }
+        }
+
+        function check_password() {
+          var regularExpression = /^([a-zA-Z0-9!@#$%^&]{6,16})$/;
+          var password_length = $("#form_password").val().length;
+          if ((password_length > 6) || (pattern.test(regularExpression))){
+            $("#password_error_message").hide();
+            $("#form_password").css("border-bottom", "2px solid #34F458");
+          } else {
+            $("#password_error_message").html("Atleast 6 Characters");
+            $("#password_error_message").show();
+            $("#form_password").css("border-bottom", "2px solid #F90A0A");
+            error_password = true;
+          }
+        }
+
+        function check_email() {
+          var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          var email = $("#form_email").val();
+          if (pattern.test(email) && email !== "") {
+            $("#email_error_message").hide();
+            $("#form_email").css("border-bottom", "2px solid #34F458");
+          } else {
+            $("#email_error_message").html("Invalid Email");
+            $("#email_error_message").show();
+            $("#form_email").css("border-bottom", "2px solid #F90A0A");
+            error_email = true;
+          }
+        }
+
+        $("#registration_form1").submit(function () {
+          error_fname = false;
+          error_email = false;
+          error_password = false;
+
+          check_fname();
+          check_email();
+          check_password();
+
+          if (
+            error_fname === false &&
+            error_email === false &&
+            error_password === false
+          ) {
+            alert("Sign Up Successfull");
+            return true;
+          } else {
+            alert("Please Fill the form Correctly");
+            return false;
+          }
+        });
+
+        $("#registration_form2").submit(function () {
+          error_fname = false;
+          error_password = false;
+
+          check_fname();
+          check_password();
+
+          if (
+            error_fname === false &&
+            error_password === false
+          ) {
+            alert("Sign In Successfull");
+            return true;
+          } else {
+            alert("Invalid Details");
+            return false;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
